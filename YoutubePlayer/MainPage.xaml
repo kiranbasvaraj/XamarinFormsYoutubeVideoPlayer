@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:YoutubePlayer.ViewModels"
+             mc:Ignorable="d"
+             x:Class="YoutubePlayer.MainPage">
+    <ContentPage.BindingContext>
+        <vm:MainPageViewModel/>
+    </ContentPage.BindingContext>
+
+    <StackLayout>
+        <!-- Place new controls here -->
+        <!--<CollectionView SelectionMode="Single" ItemsSource="{Binding VideosList}">
+            <CollectionView.ItemsLayout>
+                <d:GridItemsLayout  Orientation="Vertical" Span="2" ></d:GridItemsLayout>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Image HeightRequest="100" WidthRequest="100" Source="{Binding StandardThumbnailUrl}"></Image>
+                        <Label Text="{Binding Title}"></Label>
+                        <Label Text="{Binding Description}"></Label>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>-->
+        <CollectionView x:Name="list" ItemsSource="{Binding VideosList}" SelectionChanged="CollectionView_SelectionChanged" SelectionMode="Single">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                        Span="2"
+                        VerticalItemSpacing="20"
+                        HorizontalItemSpacing="30" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="35" />
+                            <RowDefinition Height="35" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="70" />
+                            <ColumnDefinition Width="140" />
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.RowSpan="2"
+                       Source="{Binding StandardThumbnailUrl}"
+                       Aspect="AspectFill"
+                       HeightRequest="60"
+                       WidthRequest="60" />
+                        <Label Grid.Column="1"
+                       Text="{Binding Title}"
+                       FontAttributes="Bold"
+                       LineBreakMode="TailTruncation" />
+                        <Label Grid.Row="1"
+                       Grid.Column="1"
+                       Text="{Binding Description}"
+                       LineBreakMode="TailTruncation"
+                       FontAttributes="Italic"
+                       VerticalOptions="End" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+
+</ContentPage>
